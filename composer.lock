@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78b5140a275a52eb5221d64fd390002b",
+    "content-hash": "67e3cca5d19026ed556c5782a6ea2b99",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6910,28 +6910,25 @@
             "time": "2021-07-22T09:24:00+00:00"
         },
         {
-            "name": "laravel/sail",
-            "version": "v1.11.0",
+            "name": "laravel/breeze",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "5c91d33949e43500dc1d49abc5d7c2ffb6c96f44"
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "221f1ffbaedc218a3c5513fe2eb95155605ab7b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/5c91d33949e43500dc1d49abc5d7c2ffb6c96f44",
-                "reference": "5c91d33949e43500dc1d49abc5d7c2ffb6c96f44",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/221f1ffbaedc218a3c5513fe2eb95155605ab7b2",
+                "reference": "221f1ffbaedc218a3c5513fe2eb95155605ab7b2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^8.0|^9.0",
-                "illuminate/contracts": "^8.0|^9.0",
-                "illuminate/support": "^8.0|^9.0",
+                "illuminate/filesystem": "^8.42",
+                "illuminate/support": "^8.42",
+                "illuminate/validation": "^8.42",
                 "php": "^7.3|^8.0"
             },
-            "bin": [
-                "bin/sail"
-            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -6939,13 +6936,13 @@
                 },
                 "laravel": {
                     "providers": [
-                        "Laravel\\Sail\\SailServiceProvider"
+                        "Laravel\\Breeze\\BreezeServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Laravel\\Sail\\": "src/"
+                    "Laravel\\Breeze\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6958,16 +6955,16 @@
                     "email": "taylor@laravel.com"
                 }
             ],
-            "description": "Docker files for running a basic Laravel application.",
+            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
             "keywords": [
-                "docker",
+                "auth",
                 "laravel"
             ],
             "support": {
-                "issues": "https://github.com/laravel/sail/issues",
-                "source": "https://github.com/laravel/sail"
+                "issues": "https://github.com/laravel/breeze/issues",
+                "source": "https://github.com/laravel/breeze"
             },
-            "time": "2021-10-01T13:32:17+00:00"
+            "time": "2021-09-28T14:27:54+00:00"
         },
         {
             "name": "mockery/mockery",
