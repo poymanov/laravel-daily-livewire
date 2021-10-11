@@ -38,4 +38,19 @@ class ProfileTest extends TestCase
         $response->assertSee($user->email);
         $response->assertDontSee('Successfully saved.');
     }
+
+    /**
+     * Успешное отображение формы для изменения пароля
+     */
+    public function testSuccessPassword()
+    {
+        $user = $this->createUser();
+
+        $this->signIn($user);
+
+        $response = $this->get(self::URL);
+        $response->assertSee('New Password');
+        $response->assertSee('Repeat New Password');
+        $response->assertDontSee('Successfully saved.');
+    }
 }

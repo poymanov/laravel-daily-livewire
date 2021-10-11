@@ -55,13 +55,8 @@ class Common extends Component
         $this->success = true;
     }
 
-    public function updatedUserName(): void
+    public function updated(string $propertyName): void
     {
-        $this->validateOnly('user.name');
-    }
-
-    public function updatedUserEmail(): void
-    {
-        $this->validateOnly('user.email');
+        $this->validateOnly($propertyName);
     }
 }
