@@ -31,5 +31,6 @@ class DashboardTest extends TestCase
         $response = $this->get(self::URL);
         $response->assertSee('Dashboard');
         $response->assertSee('Profile');
+        $response->assertSee('Notifications (0)');
     }
 }

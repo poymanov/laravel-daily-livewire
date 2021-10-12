@@ -53,6 +53,8 @@ class Common extends Component
         $this->user->save();
 
         $this->success = true;
+
+        $this->emit('profileUpdate');
     }
 
     public function updated(string $propertyName): void

@@ -54,6 +54,8 @@ class Password extends Component
         }
 
         $this->success = true;
+
+        $this->emit('profileUpdate');
     }
 
     public function updated(string $propertyName): void
