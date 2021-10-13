@@ -19,6 +19,9 @@
                         {{ __('Profile') }}
                     </x-nav-link>
                     @livewire('notification-menu-item')
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                        {{ __('Products') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -74,6 +77,9 @@
                 {{ __('Profile') }}
             </x-responsive-nav-link>
             @livewire('notification-menu-item')
+            <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                {{ __('Products') }}
+            </x-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
