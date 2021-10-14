@@ -23,6 +23,19 @@ class IndexTest extends TestCase
     }
 
     /**
+     * Фильтры по товарам успешно отображаются
+     */
+    public function testFilter()
+    {
+        $this->signIn();
+
+        $response = $this->get(self::URL);
+        $response->assertOk();
+
+        $response->assertSee('Search for product...');
+    }
+
+    /**
      * Успешное отображение таблицы с продуктами
      */
     public function testSuccess()
