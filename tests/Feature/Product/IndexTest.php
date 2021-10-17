@@ -29,10 +29,17 @@ class IndexTest extends TestCase
     {
         $this->signIn();
 
+        $categoryFirst  = $this->createCategory();
+        $categorySecond = $this->createCategory();
+
         $response = $this->get(self::URL);
         $response->assertOk();
 
         $response->assertSee('Search for product...');
+
+        $response->assertSee('-- choose category --');
+        $response->assertSee($categoryFirst->name);
+        $response->assertSee($categorySecond->name);
     }
 
     /**
@@ -48,8 +55,10 @@ class IndexTest extends TestCase
         $response->assertSee('Products');
         $response->assertSee('Name');
         $response->assertSee('Description');
+        $response->assertSee('Category');
         $response->assertSee($product->name);
         $response->assertSee($product->description);
+        $response->assertSee($product->category->name);
     }
 
     /**

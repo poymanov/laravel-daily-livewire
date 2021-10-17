@@ -13,6 +13,9 @@
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Description
                 </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category
+                </th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -23,6 +26,9 @@
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
                         {{ $product->description }}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-500">
+                        {{ $product->category->name }}
                     </td>
                 </tr>
             @endforeach
