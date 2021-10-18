@@ -3,7 +3,11 @@
         @include('livewire.products._filter')
     </div>
 
-    <div class="">
+    <div wire:loading.block class="mb-5 sm:rounded-lg p-3 font-medium bg-green-500 text-white">
+        Loading data...
+    </div>
+
+    <div>
         <table class="min-w-full divide-y divide-gray-200 bg-white sm:rounded-lg">
             <thead class="bg-gray-50">
             <tr>
