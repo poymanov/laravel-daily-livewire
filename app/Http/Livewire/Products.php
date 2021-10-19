@@ -44,4 +44,18 @@ class Products extends Component
 
         return view('livewire.products.index', compact('products'));
     }
+
+    /**
+     * Удаление товара
+     */
+    public function deleteProduct(int $productId): void
+    {
+        $product = Product::find($productId);
+
+        if (!$product) {
+            return;
+        }
+
+        $product->delete();
+    }
 }

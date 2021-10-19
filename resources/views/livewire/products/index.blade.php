@@ -20,6 +20,7 @@
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Category
                 </th>
+                <th scope="col" class="relative px-6 py-3"></th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -33,6 +34,9 @@
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
                         {{ $product->category->name }}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-500">
+                        <a onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click="deleteProduct({{ $product->id }})" href="" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
                     </td>
                 </tr>
             @endforeach

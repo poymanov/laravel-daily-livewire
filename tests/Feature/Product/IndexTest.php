@@ -56,6 +56,7 @@ class IndexTest extends TestCase
         $response->assertSee('Name');
         $response->assertSee('Description');
         $response->assertSee('Category');
+        $response->assertSee('Delete');
         $response->assertSee($product->name);
         $response->assertSee($product->description);
         $response->assertSee($product->category->name);
