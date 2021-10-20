@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Product;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Products extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -40,7 +40,7 @@ class Products extends Component
             ->when($this->searchCategory, function ($query) {
                 $query->where('category_id', $this->searchCategory);
             })
-            ->paginate(config('pagination.products'))->withQueryString();
+            ->paginate(config('pagination.products'));
 
         return view('livewire.products.index', compact('products'));
     }

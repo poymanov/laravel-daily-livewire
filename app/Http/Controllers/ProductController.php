@@ -9,6 +9,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products');
+        return view('products.index');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function create()
+    {
+        return view('products.create');
     }
 }

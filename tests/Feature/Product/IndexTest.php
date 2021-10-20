@@ -52,6 +52,7 @@ class IndexTest extends TestCase
 
         $response = $this->get(self::URL);
         $response->assertOk();
+        $response->assertSee('Create');
         $response->assertSee('Products');
         $response->assertSee('Name');
         $response->assertSee('Description');
