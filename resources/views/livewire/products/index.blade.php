@@ -39,7 +39,8 @@
                     <td class="px-6 py-4 text-sm text-gray-500">
                         {{ $product->category->name }}
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-500">
+                    <td class="px-6 py-4 text-sm text-gray-500 flex">
+                        <a href="{{ route('products.edit', compact('product')) }}" class="mr-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Edit</a>
                         <a onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click="deleteProduct({{ $product->id }})" href="" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</a>
                     </td>
                 </tr>

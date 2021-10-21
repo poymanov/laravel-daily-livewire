@@ -7,18 +7,18 @@ namespace Tests\Feature\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CreateTest extends TestCase
+class EditTest extends TestCase
 {
     use RefreshDatabase;
-
-    private const URL = '/products/create';
 
     /**
      * Попытка посещения гостем
      */
     public function testGuest()
     {
-        $response = $this->get(self::URL);
+        $product = $this->createProduct();
+
+        $response = $this->get($this->makeUrl($product->id));
         $response->assertRedirect(self::LOGIN_URL);
     }
 
@@ -31,15 +31,32 @@ class CreateTest extends TestCase
 
         $category = $this->createCategory();
 
-        $response = $this->get(self::URL);
-        $response->assertSeeLivewire('product.create');
+        $product = $this->createProduct();
+
+        $response = $this->get($this->makeUrl($product->id));
         $response->assertOk();
-        $response->assertSee('New Product');
+
+        $response->assertSeeLivewire('product.edit');
+        $response->assertSee('Edit Product');
         $response->assertSee('Name');
         $response->assertSee('Description');
         $response->assertSee('-- choose category --');
         $response->assertSee('Category');
-        $response->assertSee('Create');
+        $response->assertSee('Update');
         $response->assertSee($category->name);
+        $response->assertSee($product->name);
+        $response->assertSee($product->description);
+    }
+
+    /**
+     * Формирование url страницы редактирования товара
+     *
+     * @param int $id
+     *
+     * @return string
+     */
+    public function makeUrl(int $id): string
+    {
+        return '/products/' . $id . '/edit';
     }
 }

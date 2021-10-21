@@ -32,6 +32,7 @@ class ProfileTest extends TestCase
         $this->signIn($user);
 
         $response = $this->get(self::URL);
+        $response->assertSeeLivewire('profile.common');
         $response->assertSee('Name');
         $response->assertSee('Email');
         $response->assertSee($user->name);
@@ -49,6 +50,7 @@ class ProfileTest extends TestCase
         $this->signIn($user);
 
         $response = $this->get(self::URL);
+        $response->assertSeeLivewire('profile.password');
         $response->assertSee('New Password');
         $response->assertSee('Repeat New Password');
         $response->assertDontSee('Successfully saved.');
