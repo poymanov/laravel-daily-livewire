@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'name'        => $this->faker->sentence,
             'description' => $this->faker->text,
             'category_id' => Category::factory(),
+            'color'       => $this->faker->randomElement(array_keys(Product::COLORS_LIST)),
         ];
     }
 }

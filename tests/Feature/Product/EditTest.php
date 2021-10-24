@@ -42,6 +42,10 @@ class EditTest extends TestCase
         $response->assertSee('Description');
         $response->assertSee('-- choose category --');
         $response->assertSee('Category');
+        $response->assertSee('Color');
+        $response->assertSee('Red');
+        $response->assertSee('Blue');
+        $response->assertSee('Green');
         $response->assertSee('Update');
         $response->assertSee($category->name);
         $response->assertSee($product->name);

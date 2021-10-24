@@ -7,6 +7,7 @@ namespace App\Http\Livewire\Product;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Edit extends Component
@@ -17,19 +18,27 @@ class Edit extends Component
     /** @var Product */
     public $product;
 
+    /** @var array */
+    public $colors;
+
     /**
-     * @var string[]
+     * @return array
      */
-    protected $rules = [
-        'product.name'        => 'required|min:3',
-        'product.description' => 'required|min:3',
-        'product.category_id' => 'required|exists:categories,id',
-    ];
+    protected function rules(): array
+    {
+        return [
+            'product.name'        => 'required|min:3',
+            'product.description' => 'required|min:3',
+            'product.category_id' => 'required|exists:categories,id',
+            'product.color'       => ['nullable', Rule::in(array_keys(Product::COLORS_LIST))],
+        ];
+    }
 
     public function mount(Product $product): void
     {
         $this->categories = Category::all();
         $this->product    = $product;
+        $this->colors     = Product::COLORS_LIST;
     }
 
     /**

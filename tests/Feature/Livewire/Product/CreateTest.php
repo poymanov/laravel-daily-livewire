@@ -59,6 +59,17 @@ class CreateTest extends TestCase
     }
 
     /**
+     * Попытка создания с несуществующим цветом
+     */
+    public function testNotExistedColor()
+    {
+        Livewire::test(Create::class)
+            ->set('product.color', 'test')
+            ->call('submit')
+            ->assertHasErrors(['product.color' => 'in']);
+    }
+
+    /**
      * Успешное создание
      */
     public function testSuccess()
@@ -66,11 +77,13 @@ class CreateTest extends TestCase
         $name        = $this->faker->sentence;
         $description = $this->faker->text;
         $category    = $this->createCategory();
+        $color       = 'red';
 
         Livewire::test(Create::class)
             ->set('product.name', $name)
             ->set('product.description', $description)
             ->set('product.category_id', $category->id)
+            ->set('product.color', $color)
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -79,6 +92,7 @@ class CreateTest extends TestCase
             'name'        => $name,
             'description' => $description,
             'category_id' => $category->id,
+            'color'       => $color,
         ]);
     }
 }

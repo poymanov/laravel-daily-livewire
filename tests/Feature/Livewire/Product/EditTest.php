@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\Product;
 
+use App\Http\Livewire\Product\Create;
 use App\Http\Livewire\Product\Edit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -70,6 +71,17 @@ class EditTest extends TestCase
     }
 
     /**
+     * Попытка изменения с несуществующим цветом
+     */
+    public function testNotExistedColor()
+    {
+        Livewire::test(Create::class)
+            ->set('product.color', 'test')
+            ->call('submit')
+            ->assertHasErrors(['product.color' => 'in']);
+    }
+
+    /**
      * Успешное изменение
      */
     public function testSuccess()
@@ -79,11 +91,13 @@ class EditTest extends TestCase
         $name        = $this->faker->sentence;
         $description = $this->faker->text;
         $category    = $this->createCategory();
+        $color       = 'blue';
 
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name', $name)
             ->set('product.description', $description)
             ->set('product.category_id', $category->id)
+            ->set('product.color', $color)
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -93,6 +107,7 @@ class EditTest extends TestCase
             'name'        => $name,
             'description' => $description,
             'category_id' => $category->id,
+            'color'       => $color,
         ]);
     }
 }
