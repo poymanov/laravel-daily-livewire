@@ -84,6 +84,7 @@ class CreateTest extends TestCase
             ->set('product.description', $description)
             ->set('product.category_id', $category->id)
             ->set('product.color', $color)
+            ->set('product.in_stock', true)
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -93,6 +94,7 @@ class CreateTest extends TestCase
             'description' => $description,
             'category_id' => $category->id,
             'color'       => $color,
+            'in_stock'    => true,
         ]);
     }
 }

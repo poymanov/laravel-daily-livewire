@@ -26,10 +26,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Category       $category
  * @property int                             $category_id
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategoryId($value)
+ * @property string|null $color
+ * @property int $in_stock
+ * @property-read string $color_label
+ * @property-read string $in_stock_label
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereInStock($value)
  */
 class Product extends Model
 {
     use HasFactory;
+
+    /** @var string[] */
+    protected $fillable = ['name', 'description', 'category_id', 'color', 'in_stock'];
 
     public const COLORS_LIST = [
         'red'   => 'Red',
@@ -51,5 +60,13 @@ class Product extends Model
     public function getColorLabelAttribute(): ?string
     {
         return self::COLORS_LIST[$this->color] ?? $this->color;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInStockLabelAttribute(): string
+    {
+        return $this->in_stock ? 'Yes' : 'No';
     }
 }

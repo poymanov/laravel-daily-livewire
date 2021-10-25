@@ -43,6 +43,7 @@ class CreateTest extends TestCase
         $response->assertSee('Red');
         $response->assertSee('Blue');
         $response->assertSee('Green');
+        $response->assertSee('In Stock?');
         $response->assertSee('Create');
         $response->assertSee($category->name);
     }

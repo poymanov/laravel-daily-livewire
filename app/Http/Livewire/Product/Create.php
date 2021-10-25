@@ -31,6 +31,7 @@ class Create extends Component
             'product.description' => 'required|min:3',
             'product.category_id' => 'required|exists:categories,id',
             'product.color'       => ['nullable', Rule::in(array_keys(Product::COLORS_LIST))],
+            'product.in_stock'    => 'boolean',
         ];
     }
 
@@ -55,6 +56,10 @@ class Create extends Component
     public function submit(): void
     {
         $this->validate();
+
+        if (!$this->product->in_stock) {
+            $this->product->in_stock = 0;
+        }
 
         $this->product->save();
 
