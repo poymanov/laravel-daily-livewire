@@ -43,7 +43,11 @@
                         {{ $product->description }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
-                        {{ $product->category->name }}
+                        <ul class="list-disc">
+                            @foreach($product->categories as $category)
+                                <li>{{ $category->name }}</li>
+                            @endforeach
+                        </ul>
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-500">
                         {{ $product->colorLabel }}

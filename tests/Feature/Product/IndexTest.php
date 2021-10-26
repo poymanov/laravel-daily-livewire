@@ -48,7 +48,13 @@ class IndexTest extends TestCase
     public function testSuccess()
     {
         $this->signIn();
+
+        $categoryFirst  = $this->createCategory();
+        $categorySecond = $this->createCategory();
+
         $product = $this->createProduct();
+        $product->categories()->attach($categoryFirst->id);
+        $product->categories()->attach($categorySecond->id);
 
         $response = $this->get(self::URL);
         $response->assertOk();
@@ -63,7 +69,8 @@ class IndexTest extends TestCase
         $response->assertSee('Delete');
         $response->assertSee($product->name);
         $response->assertSee($product->description);
-        $response->assertSee($product->category->name);
+        $response->assertSee($categoryFirst->name);
+        $response->assertSee($categorySecond->name);
         $response->assertSee(ucfirst($product->color));
         $response->assertSee('No');
     }

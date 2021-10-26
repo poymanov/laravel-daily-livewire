@@ -33,12 +33,14 @@ class Index extends Component
      */
     public function render()
     {
-        $products = Product::with('category')
+        $products = Product::with('categories')
             ->when($this->searchQuery, function ($query) {
                 $query->where('name', 'like', '%' . $this->searchQuery . '%');
             })
             ->when($this->searchCategory, function ($query) {
-                $query->where('category_id', $this->searchCategory);
+                $query->whereHas('categories', function ($categoriesQuery) {
+                    $categoriesQuery->where('id', $this->searchCategory);
+                });
             })
             ->paginate(config('pagination.products'));
 

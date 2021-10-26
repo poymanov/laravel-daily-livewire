@@ -26,9 +26,13 @@ class EditTest extends TestCase
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name')
             ->set('product.description')
-            ->set('product.category_id')
+            ->set('productCategories')
             ->call('submit')
-            ->assertHasErrors(['product.name' => 'required', 'product.description' => 'required', 'product.category_id' => 'required']);
+            ->assertHasErrors([
+                'product.name'        => 'required',
+                'product.description' => 'required',
+                'productCategories'   => 'required',
+            ]);
     }
 
     /**
@@ -58,19 +62,6 @@ class EditTest extends TestCase
     }
 
     /**
-     * Попытка изменения с несуществующей категорией
-     */
-    public function testNotExistedCategoryId()
-    {
-        $product = $this->createProduct();
-
-        Livewire::test(Edit::class, compact('product'))
-            ->set('product.category_id', 999)
-            ->call('submit')
-            ->assertHasErrors(['product.category_id' => 'exists']);
-    }
-
-    /**
      * Попытка изменения с несуществующим цветом
      */
     public function testNotExistedColor()
@@ -88,15 +79,17 @@ class EditTest extends TestCase
     {
         $product = $this->createProduct();
 
-        $name        = $this->faker->sentence;
-        $description = $this->faker->text;
-        $category    = $this->createCategory();
-        $color       = 'blue';
+        $name           = $this->faker->sentence;
+        $description    = $this->faker->text;
+        $categoryFirst  = $this->createCategory();
+        $categorySecond = $this->createCategory();
+        $category       = $this->createCategory();
+        $color          = 'blue';
 
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name', $name)
             ->set('product.description', $description)
-            ->set('product.category_id', $category->id)
+            ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
             ->set('product.color', $color)
             ->set('product.in_stock', true)
             ->call('submit')
@@ -107,9 +100,18 @@ class EditTest extends TestCase
             'id'          => $product->id,
             'name'        => $name,
             'description' => $description,
-            'category_id' => $category->id,
             'color'       => $color,
             'in_stock'    => true,
+        ]);
+
+        $this->assertDatabaseHas('category_product', [
+            'category_id' => $categoryFirst->id,
+            'product_id'  => $product->id,
+        ]);
+
+        $this->assertDatabaseHas('category_product', [
+            'category_id' => $categorySecond->id,
+            'product_id'  => $product->id,
         ]);
     }
 }

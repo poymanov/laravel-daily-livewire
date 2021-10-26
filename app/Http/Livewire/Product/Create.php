@@ -21,6 +21,9 @@ class Create extends Component
     /** @var array */
     public $colors;
 
+    /** @var array */
+    public $productCategories;
+
     /**
      * @return array
      */
@@ -29,9 +32,9 @@ class Create extends Component
         return [
             'product.name'        => 'required|min:3',
             'product.description' => 'required|min:3',
-            'product.category_id' => 'required|exists:categories,id',
             'product.color'       => ['nullable', Rule::in(array_keys(Product::COLORS_LIST))],
             'product.in_stock'    => 'boolean',
+            'productCategories'   => 'required|array',
         ];
     }
 
@@ -62,6 +65,7 @@ class Create extends Component
         }
 
         $this->product->save();
+        $this->product->categories()->sync($this->productCategories);
 
         $this->redirect(route('products.index'));
     }

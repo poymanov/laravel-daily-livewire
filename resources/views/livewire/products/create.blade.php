@@ -18,17 +18,17 @@
                 @endif
             </div>
             <div class="mb-2">
-                <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
+                <label for="category" class="block text-sm font-medium text-gray-700">Categories</label>
 
-                <select name="category_id" id="category_id" wire:model="product.category_id" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                <select multiple name="category" id="category" wire:model="productCategories" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
                     <option value="">-- choose category --</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
 
-                @if($errors->has('product.category_id'))
-                    <span class="text-sm font-medium text-red-500">{{ $errors->first('product.category_id') }}</span>
+                @if($errors->has('product.productCategories'))
+                    <span class="text-sm font-medium text-red-500">{{ $errors->first('product.productCategories') }}</span>
                 @endif
             </div>
             <div class="mb-2">

@@ -22,7 +22,11 @@ class CreateTest extends TestCase
     {
         Livewire::test(Create::class)
             ->call('submit')
-            ->assertHasErrors(['product.name' => 'required', 'product.description' => 'required', 'product.category_id' => 'required']);
+            ->assertHasErrors([
+                'product.name'        => 'required',
+                'product.description' => 'required',
+                'productCategories'   => 'required',
+            ]);
     }
 
     /**
@@ -48,17 +52,6 @@ class CreateTest extends TestCase
     }
 
     /**
-     * Попытка создания с несуществующей категорией
-     */
-    public function testNotExistedCategoryId()
-    {
-        Livewire::test(Create::class)
-            ->set('product.category_id', 999)
-            ->call('submit')
-            ->assertHasErrors(['product.category_id' => 'exists']);
-    }
-
-    /**
      * Попытка создания с несуществующим цветом
      */
     public function testNotExistedColor()
@@ -74,17 +67,18 @@ class CreateTest extends TestCase
      */
     public function testSuccess()
     {
-        $name        = $this->faker->sentence;
-        $description = $this->faker->text;
-        $category    = $this->createCategory();
-        $color       = 'red';
+        $name           = $this->faker->sentence;
+        $description    = $this->faker->text;
+        $categoryFirst  = $this->createCategory();
+        $categorySecond = $this->createCategory();
+        $color          = 'red';
 
         Livewire::test(Create::class)
             ->set('product.name', $name)
             ->set('product.description', $description)
-            ->set('product.category_id', $category->id)
             ->set('product.color', $color)
             ->set('product.in_stock', true)
+            ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -92,9 +86,18 @@ class CreateTest extends TestCase
         $this->assertDatabaseHas('products', [
             'name'        => $name,
             'description' => $description,
-            'category_id' => $category->id,
             'color'       => $color,
             'in_stock'    => true,
+        ]);
+
+        $this->assertDatabaseCount('category_product', 2);
+
+        $this->assertDatabaseHas('category_product', [
+            'category_id' => $categoryFirst->id,
+        ]);
+
+        $this->assertDatabaseHas('category_product', [
+            'category_id' => $categorySecond->id,
         ]);
     }
 }
