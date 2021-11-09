@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Livewire\Product;
 
 use App\Http\Livewire\Product\Create;
+use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -73,11 +74,14 @@ class CreateTest extends TestCase
         $categorySecond = $this->createCategory();
         $color          = 'red';
 
+        $stockDate = new DateTime($this->faker->date);
+
         Livewire::test(Create::class)
             ->set('product.name', $name)
             ->set('product.description', $description)
             ->set('product.color', $color)
             ->set('product.in_stock', true)
+            ->set('product.stock_date', $stockDate->format('m/d/Y'))
             ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
             ->call('submit')
             ->assertHasNoErrors()
@@ -88,6 +92,7 @@ class CreateTest extends TestCase
             'description' => $description,
             'color'       => $color,
             'in_stock'    => true,
+            'stock_date'  => $stockDate->format('Y-m-d'),
         ]);
 
         $this->assertDatabaseCount('category_product', 2);

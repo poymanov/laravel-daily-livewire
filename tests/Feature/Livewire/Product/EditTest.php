@@ -6,6 +6,7 @@ namespace Tests\Feature\Livewire\Product;
 
 use App\Http\Livewire\Product\Create;
 use App\Http\Livewire\Product\Edit;
+use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -86,12 +87,15 @@ class EditTest extends TestCase
         $category       = $this->createCategory();
         $color          = 'blue';
 
+        $stockDate = new DateTime($this->faker->date);
+
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name', $name)
             ->set('product.description', $description)
             ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
             ->set('product.color', $color)
             ->set('product.in_stock', true)
+            ->set('product.stock_date', $stockDate->format('m/d/Y'))
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -102,6 +106,7 @@ class EditTest extends TestCase
             'description' => $description,
             'color'       => $color,
             'in_stock'    => true,
+            'stock_date'  => $stockDate->format('Y-m-d'),
         ]);
 
         $this->assertDatabaseHas('category_product', [

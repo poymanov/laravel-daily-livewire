@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Product;
 
+use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -56,6 +57,8 @@ class IndexTest extends TestCase
         $product->categories()->attach($categoryFirst->id);
         $product->categories()->attach($categorySecond->id);
 
+        $stockDate = new DateTime($product->stock_date);
+
         $response = $this->get(self::URL);
         $response->assertOk();
         $response->assertSee('Create');
@@ -72,6 +75,7 @@ class IndexTest extends TestCase
         $response->assertSee($categoryFirst->name);
         $response->assertSee($categorySecond->name);
         $response->assertSee(ucfirst($product->color));
+        $response->assertSee($stockDate->format('m/d/Y'));
         $response->assertSee('No');
     }
 

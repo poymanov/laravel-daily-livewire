@@ -47,6 +47,7 @@ class EditTest extends TestCase
         $response->assertSee('Blue');
         $response->assertSee('Green');
         $response->assertSee('In Stock?');
+        $response->assertSee('Stock Date');
         $response->assertSee('Update');
         $response->assertSee($category->name);
         $response->assertSee($product->name);

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -21,10 +22,13 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $stockDate = new DateTime();
+
         return [
             'name'        => $this->faker->sentence,
             'description' => $this->faker->text,
             'color'       => $this->faker->randomElement(array_keys(Product::COLORS_LIST)),
+            'stock_date'  => $stockDate->format('m/d/Y'),
         ];
     }
 }

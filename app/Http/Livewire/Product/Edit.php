@@ -34,6 +34,7 @@ class Edit extends Component
             'product.description' => 'required|min:3',
             'product.color'       => ['nullable', Rule::in(array_keys(Product::COLORS_LIST))],
             'product.in_stock'    => 'boolean',
+            'product.stock_date'  => 'date',
             'productCategories'   => 'required|array',
         ];
     }
