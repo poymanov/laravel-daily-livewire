@@ -28,7 +28,7 @@ services:
         depends_on:
             - db
     db:
-        image: mysql:8
+        image: mariadb:latest
         volumes:
             - db:/var/lib/mysql
         environment:
