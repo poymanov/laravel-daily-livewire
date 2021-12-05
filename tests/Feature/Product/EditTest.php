@@ -48,10 +48,12 @@ class EditTest extends TestCase
         $response->assertSee('Green');
         $response->assertSee('In Stock?');
         $response->assertSee('Stock Date');
+        $response->assertSee('Photo');
         $response->assertSee('Update');
         $response->assertSee($category->name);
         $response->assertSee($product->name);
         $response->assertSee($product->description);
+        $response->assertSee($product->photoUrl);
     }
 
     /**

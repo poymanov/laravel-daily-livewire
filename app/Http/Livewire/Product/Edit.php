@@ -7,11 +7,16 @@ namespace App\Http\Livewire\Product;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     /** @var Collection */
     public $categories;
 
@@ -23,6 +28,9 @@ class Edit extends Component
 
     /** @var array */
     public $productCategories;
+
+    /** @var UploadedFile|null */
+    public $photo;
 
     /**
      * @return array
@@ -36,6 +44,7 @@ class Edit extends Component
             'product.in_stock'    => 'boolean',
             'product.stock_date'  => 'date',
             'productCategories'   => 'required|array',
+            'photo'               => 'image',
         ];
     }
 
@@ -61,6 +70,18 @@ class Edit extends Component
     public function submit(): void
     {
         $this->validate();
+
+        if ($this->photo) {
+            if ($this->product->photo) {
+                Storage::disk('public')->delete($this->product->photo);
+            }
+
+            $filename = $this->photo->store('/', 'public');
+
+            if ($filename) {
+                $this->product->photo = $filename;
+            }
+        }
 
         $this->product->save();
         $this->product->categories()->sync($this->productCategories);

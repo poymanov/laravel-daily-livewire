@@ -63,6 +63,7 @@ class IndexTest extends TestCase
         $response->assertOk();
         $response->assertSee('Create');
         $response->assertSee('Products');
+        $response->assertSee('Photo');
         $response->assertSee('Name');
         $response->assertSee('Description');
         $response->assertSee('Category');
@@ -70,6 +71,7 @@ class IndexTest extends TestCase
         $response->assertSee('In Stock?');
         $response->assertSee('Edit');
         $response->assertSee('Delete');
+        $response->assertSee('storage/' . $product->photo);
         $response->assertSee($product->name);
         $response->assertSee($product->description);
         $response->assertSee($categoryFirst->name);

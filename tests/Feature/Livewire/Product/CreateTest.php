@@ -8,6 +8,8 @@ use App\Http\Livewire\Product\Create;
 use DateTime;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -68,6 +70,8 @@ class CreateTest extends TestCase
      */
     public function testSuccess()
     {
+        Storage::fake('public');
+
         $name           = $this->faker->sentence;
         $description    = $this->faker->text;
         $categoryFirst  = $this->createCategory();
@@ -76,6 +80,8 @@ class CreateTest extends TestCase
 
         $stockDate = new DateTime($this->faker->date);
 
+        $file = UploadedFile::fake()->image('photo.jpg');
+
         Livewire::test(Create::class)
             ->set('product.name', $name)
             ->set('product.description', $description)
@@ -83,6 +89,7 @@ class CreateTest extends TestCase
             ->set('product.in_stock', true)
             ->set('product.stock_date', $stockDate->format('m/d/Y'))
             ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
+            ->set('photo', $file)
             ->call('submit')
             ->assertHasNoErrors()
             ->assertRedirect('/products');
@@ -104,5 +111,7 @@ class CreateTest extends TestCase
         $this->assertDatabaseHas('category_product', [
             'category_id' => $categorySecond->id,
         ]);
+
+        $this->assertCount(1, Storage::disk('public')->allFiles());
     }
 }

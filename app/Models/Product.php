@@ -34,6 +34,9 @@ use Illuminate\Support\Carbon;
  * @mixin \Eloquent
  * @property string                                                               $stock_date
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereStockDate($value)
+ * @property string|null $photo
+ * @property-read string|null $photo_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePhoto($value)
  */
 class Product extends Model
 {
@@ -102,5 +105,17 @@ class Product extends Model
                 $this->attributes['stock_date'] = null;
             }
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhotoUrlAttribute(): ?string
+    {
+        if ($this->photo) {
+            return '/storage/' . $this->photo;
+        }
+
+        return null;
     }
 }

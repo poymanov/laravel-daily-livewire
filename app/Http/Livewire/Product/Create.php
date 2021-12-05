@@ -7,11 +7,15 @@ namespace App\Http\Livewire\Product;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     /** @var Collection */
     public $categories;
 
@@ -23,6 +27,9 @@ class Create extends Component
 
     /** @var array */
     public $productCategories;
+
+    /** @var UploadedFile|null */
+    public $photo;
 
     /**
      * @return array
@@ -36,6 +43,7 @@ class Create extends Component
             'product.in_stock'    => 'boolean',
             'product.stock_date'  => 'date',
             'productCategories'   => 'required|array',
+            'photo'               => 'image',
         ];
     }
 
@@ -63,6 +71,14 @@ class Create extends Component
 
         if (!$this->product->in_stock) {
             $this->product->in_stock = 0;
+        }
+
+        if ($this->photo) {
+            $filename = $this->photo->store('/', 'public');
+
+            if ($filename) {
+                $this->product->photo = $filename;
+            }
         }
 
         $this->product->save();

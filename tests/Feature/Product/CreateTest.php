@@ -46,6 +46,7 @@ class CreateTest extends TestCase
         $response->assertSee('In Stock?');
         $response->assertSee('Stock Date');
         $response->assertSee('Create');
+        $response->assertSee('Photo');
         $response->assertSee($category->name);
     }
 }

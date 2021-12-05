@@ -29,6 +29,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->text,
             'color'       => $this->faker->randomElement(array_keys(Product::COLORS_LIST)),
             'stock_date'  => $stockDate->format('m/d/Y'),
+            'photo'       => $this->faker->image,
         ];
     }
 }

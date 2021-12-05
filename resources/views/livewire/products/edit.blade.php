@@ -63,6 +63,18 @@
                     <span class="text-sm font-medium text-red-500">{{ $errors->first('product.stock_date') }}</span>
                 @endif
             </div>
+            <div class="mb-2">
+                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
+                <input wire:model.defer="photo" type="file" name="photo" id="stock_date" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+
+                @if($product->photoUrl)
+                    <img src="{{ $product->photoUrl }}" alt="{{ $product->name }} photo" width="150" class="mt-2 mb-2">
+                @endif
+
+                @if($errors->has('photo'))
+                    <span class="text-sm font-medium text-red-500">{{ $errors->first('photo') }}</span>
+                @endif
+            </div>
         </div>
         <div class="px-4 py-3 bg-gray-50 sm:px-6 flex">
             <button type="submit" class="ml-auto inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
