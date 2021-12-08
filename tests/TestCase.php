@@ -3,6 +3,8 @@
 namespace Tests;
 
 use App\Models\Category;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -56,5 +58,29 @@ abstract class TestCase extends BaseTestCase
     protected function createCategory(array $params = []): Category
     {
         return Category::factory()->create($params);
+    }
+
+    /**
+     * Создание сущности {@see Country}
+     *
+     * @param array $params Параметры нового объекта
+     *
+     * @return Country
+     */
+    protected function createCountry(array $params = []): Country
+    {
+        return Country::factory()->create($params);
+    }
+
+    /**
+     * Создание сущности {@see City}
+     *
+     * @param array $params Параметры нового объекта
+     *
+     * @return City
+     */
+    protected function createCity(array $params = []): City
+    {
+        return City::factory()->create($params);
     }
 }

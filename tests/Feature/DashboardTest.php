@@ -28,10 +28,12 @@ class DashboardTest extends TestCase
     public function testNavigation()
     {
         $this->signIn();
+
         $response = $this->get(self::URL);
         $response->assertSee('Dashboard');
         $response->assertSee('Profile');
         $response->assertSee('Notifications (0)');
         $response->assertSee('Products');
+        $response->assertSee('Dropdown');
     }
 }

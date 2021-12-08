@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                         {{ __('Products') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
+                        {{ __('Dropdown') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -79,6 +82,9 @@
             @livewire('notification-menu-item')
             <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                 {{ __('Products') }}
+            </x-nav-link>
+            <x-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
+                {{ __('Dropdown') }}
             </x-nav-link>
         </div>
 
