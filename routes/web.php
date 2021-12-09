@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\MultiplyInputController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'dropdown', 'as' => 'dropdown.'], function () {
         Route::get('', [DropdownController::class, 'form'])->name('form');
         Route::post('', [DropdownController::class, 'submit'])->name('submit');
+    });
+
+    Route::group(['prefix' => 'multiply-input', 'as' => 'multiply-input.'], function () {
+        Route::get('', [MultiplyInputController::class, 'form'])->name('form');
+        Route::post('', [MultiplyInputController::class, 'submit'])->name('submit');
     });
 });
 

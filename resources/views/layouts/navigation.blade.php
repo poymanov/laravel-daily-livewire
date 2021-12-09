@@ -25,6 +25,9 @@
                     <x-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
                         {{ __('Dropdown') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('multiply-input.form')" :active="request()->routeIs('multiply-input.*')">
+                        {{ __('Multiply Input') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -85,6 +88,9 @@
             </x-nav-link>
             <x-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
                 {{ __('Dropdown') }}
+            </x-nav-link>
+            <x-nav-link :href="route('multiply-input.form')" :active="request()->routeIs('multiply-input.*')">
+                {{ __('Multiply Input') }}
             </x-nav-link>
         </div>
 

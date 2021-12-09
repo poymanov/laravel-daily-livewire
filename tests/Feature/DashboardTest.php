@@ -35,5 +35,6 @@ class DashboardTest extends TestCase
         $response->assertSee('Notifications (0)');
         $response->assertSee('Products');
         $response->assertSee('Dropdown');
+        $response->assertSee('Multiply Input');
     }
 }
