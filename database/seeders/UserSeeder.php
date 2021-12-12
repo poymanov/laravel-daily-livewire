@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +16,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory(20)->withoutPhoto()->create();
+        User::factory(5)->create();
     }
 }

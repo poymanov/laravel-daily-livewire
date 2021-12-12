@@ -41,6 +41,7 @@ class FormTest extends TestCase
         $response->assertSee('Quantity');
         $response->assertSee('Delete');
         $response->assertSee($product->name);
+        $response->assertSee($product->price);
         $response->assertSee('Add Another Product');
         $response->assertSee('Save Order');
     }

@@ -28,6 +28,7 @@ class CreateTest extends TestCase
             ->assertHasErrors([
                 'product.name'        => 'required',
                 'product.description' => 'required',
+                'product.price'       => 'required',
                 'productCategories'   => 'required',
             ]);
     }
@@ -66,6 +67,17 @@ class CreateTest extends TestCase
     }
 
     /**
+     * Попытка создания с некорректной ценой
+     */
+    public function testWrongPrice()
+    {
+        Livewire::test(Create::class)
+            ->set('product.price', 'test')
+            ->call('submit')
+            ->assertHasErrors(['product.price' => 'integer']);
+    }
+
+    /**
      * Успешное создание
      */
     public function testSuccess()
@@ -77,6 +89,7 @@ class CreateTest extends TestCase
         $categoryFirst  = $this->createCategory();
         $categorySecond = $this->createCategory();
         $color          = 'red';
+        $price          = 22;
 
         $stockDate = new DateTime($this->faker->date);
 
@@ -85,6 +98,7 @@ class CreateTest extends TestCase
         Livewire::test(Create::class)
             ->set('product.name', $name)
             ->set('product.description', $description)
+            ->set('product.price', $price)
             ->set('product.color', $color)
             ->set('product.in_stock', true)
             ->set('product.stock_date', $stockDate->format('m/d/Y'))
@@ -97,6 +111,7 @@ class CreateTest extends TestCase
         $this->assertDatabaseHas('products', [
             'name'        => $name,
             'description' => $description,
+            'price'       => $price,
             'color'       => $color,
             'in_stock'    => true,
             'stock_date'  => $stockDate->format('Y-m-d'),

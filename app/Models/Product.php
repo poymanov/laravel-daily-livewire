@@ -34,9 +34,11 @@ use Illuminate\Support\Carbon;
  * @mixin \Eloquent
  * @property string                                                               $stock_date
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereStockDate($value)
- * @property string|null $photo
- * @property-read string|null $photo_url
+ * @property string|null                                                          $photo
+ * @property-read string|null                                                     $photo_url
  * @method static \Illuminate\Database\Eloquent\Builder|Product wherePhoto($value)
+ * @property int                                                                  $price
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
  */
 class Product extends Model
 {

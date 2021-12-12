@@ -66,6 +66,7 @@ class IndexTest extends TestCase
         $response->assertSee('Photo');
         $response->assertSee('Name');
         $response->assertSee('Description');
+        $response->assertSee('Price');
         $response->assertSee('Category');
         $response->assertSee('Color');
         $response->assertSee('In Stock?');
@@ -74,6 +75,7 @@ class IndexTest extends TestCase
         $response->assertSee('storage/' . $product->photo);
         $response->assertSee($product->name);
         $response->assertSee($product->description);
+        $response->assertSee($product->price);
         $response->assertSee($categoryFirst->name);
         $response->assertSee($categorySecond->name);
         $response->assertSee(ucfirst($product->color));

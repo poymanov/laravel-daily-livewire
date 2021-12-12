@@ -28,6 +28,9 @@
                     <x-nav-link :href="route('multiply-input.form')" :active="request()->routeIs('multiply-input.*')">
                         {{ __('Multiply Input') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('edit-modal')" :active="request()->routeIs('edit-modal.*')">
+                        {{ __('Edit Modal') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -83,15 +86,18 @@
                 {{ __('Profile') }}
             </x-responsive-nav-link>
             @livewire('notification-menu-item')
-            <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
                 {{ __('Products') }}
-            </x-nav-link>
-            <x-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dropdown.form')" :active="request()->routeIs('dropdown.*')">
                 {{ __('Dropdown') }}
-            </x-nav-link>
-            <x-nav-link :href="route('multiply-input.form')" :active="request()->routeIs('multiply-input.*')">
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('multiply-input.form')" :active="request()->routeIs('multiply-input.*')">
                 {{ __('Multiply Input') }}
-            </x-nav-link>
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('edit-modal')" :active="request()->routeIs('edit-modal.*')">
+                {{ __('Edit Modal') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

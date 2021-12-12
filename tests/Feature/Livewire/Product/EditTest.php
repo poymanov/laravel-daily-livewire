@@ -29,11 +29,13 @@ class EditTest extends TestCase
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name')
             ->set('product.description')
+            ->set('product.price')
             ->set('productCategories')
             ->call('submit')
             ->assertHasErrors([
                 'product.name'        => 'required',
                 'product.description' => 'required',
+                'product.price'       => 'required',
                 'productCategories'   => 'required',
             ]);
     }
@@ -69,10 +71,25 @@ class EditTest extends TestCase
      */
     public function testNotExistedColor()
     {
-        Livewire::test(Create::class)
+        $product = $this->createProduct();
+
+        Livewire::test(Edit::class, compact('product'))
             ->set('product.color', 'test')
             ->call('submit')
             ->assertHasErrors(['product.color' => 'in']);
+    }
+
+    /**
+     * Попытка создания с некорректной ценой
+     */
+    public function testWrongPrice()
+    {
+        $product = $this->createProduct();
+
+        Livewire::test(Edit::class, compact('product'))
+            ->set('product.price', 'test')
+            ->call('submit')
+            ->assertHasErrors(['product.price' => 'integer']);
     }
 
     /**
@@ -88,8 +105,8 @@ class EditTest extends TestCase
         $description    = $this->faker->text;
         $categoryFirst  = $this->createCategory();
         $categorySecond = $this->createCategory();
-        $category       = $this->createCategory();
         $color          = 'blue';
+        $price          = 22;
 
         $file = UploadedFile::fake()->image('photo.jpg');
 
@@ -98,6 +115,7 @@ class EditTest extends TestCase
         Livewire::test(Edit::class, compact('product'))
             ->set('product.name', $name)
             ->set('product.description', $description)
+            ->set('product.price', $price)
             ->set('productCategories', [$categoryFirst->id, $categorySecond->id])
             ->set('product.color', $color)
             ->set('product.in_stock', true)
@@ -111,6 +129,7 @@ class EditTest extends TestCase
             'id'          => $product->id,
             'name'        => $name,
             'description' => $description,
+            'price'       => $price,
             'color'       => $color,
             'in_stock'    => true,
             'stock_date'  => $stockDate->format('Y-m-d'),

@@ -18,6 +18,14 @@
                 @endif
             </div>
             <div class="mb-2">
+                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input wire:model="product.price" type="number" name="price" id="price" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+
+                @if($errors->has('product.price'))
+                    <span class="text-sm font-medium text-red-500">{{ $errors->first('product.price') }}</span>
+                @endif
+            </div>
+            <div class="mb-2">
                 <label for="category" class="block text-sm font-medium text-gray-700">Categories</label>
 
                 <select multiple name="category" id="category" wire:model="productCategories" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>

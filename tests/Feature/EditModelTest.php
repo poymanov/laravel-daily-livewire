@@ -7,11 +7,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DashboardTest extends TestCase
+class EditModelTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const URL = '/dashboard';
+    private const URL = '/edit-modal';
 
     /**
      * Попытка посещения гостем
@@ -23,19 +23,20 @@ class DashboardTest extends TestCase
     }
 
     /**
-     * Отображение всех пунктов главного меню
+     * Успешное отображение списка товаров
      */
-    public function testNavigation()
+    public function testSuccess()
     {
         $this->signIn();
+        $product = $this->createProduct();
 
         $response = $this->get(self::URL);
-        $response->assertSee('Dashboard');
-        $response->assertSee('Profile');
-        $response->assertSee('Notifications (0)');
-        $response->assertSee('Products');
-        $response->assertSee('Dropdown');
-        $response->assertSee('Multiply Input');
+        $response->assertSeeLivewire('edit-modal');
         $response->assertSee('Edit Modal');
+        $response->assertSee('Name');
+        $response->assertSee('Price');
+        $response->assertSee($product->name);
+        $response->assertSee($product->price);
+        $response->assertSee('Edit');
     }
 }

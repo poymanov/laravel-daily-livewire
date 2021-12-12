@@ -39,6 +39,7 @@ class Create extends Component
         return [
             'product.name'        => 'required|min:3',
             'product.description' => 'required|min:3',
+            'product.price'       => 'required|integer',
             'product.color'       => ['nullable', Rule::in(array_keys(Product::COLORS_LIST))],
             'product.in_stock'    => 'boolean',
             'product.stock_date'  => 'date',
