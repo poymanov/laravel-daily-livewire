@@ -31,6 +31,9 @@
                     <x-nav-link :href="route('edit-modal')" :active="request()->routeIs('edit-modal.*')">
                         {{ __('Edit Modal') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('auto-refresh')" :active="request()->routeIs('auto-refresh')">
+                        {{ __('Auto Refresh') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -97,6 +100,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('edit-modal')" :active="request()->routeIs('edit-modal.*')">
                 {{ __('Edit Modal') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('auto-refresh')" :active="request()->routeIs('auto-refresh')">
+                {{ __('Auto Refresh') }}
             </x-responsive-nav-link>
         </div>
 
